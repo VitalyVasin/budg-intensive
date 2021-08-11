@@ -3,7 +3,7 @@ class Coffee:
         self.ingredients = ingredients
 
     def __str__(self):
-        return 'Coffee Class'
+        return f'Coffee Class'
 
     @classmethod
     def get_cappuchino(cls):
