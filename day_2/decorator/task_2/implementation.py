@@ -8,7 +8,7 @@ def check_value(func):
     """
     def wrapper(a):
         try:
-            if (type(a) != int) or (a == None) or a < 0:
+            if not isinstance(a, int) or a < 0:
                 raise MyException
             else:
                 func(a)
