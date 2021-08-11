@@ -1,4 +1,4 @@
-class Tuple:
+class Tuple(tuple):
     """
     Создает неизменяемый объект, с упорядоченной структурой, методами count и index.
     При создание принимается последовательность объектов
@@ -9,7 +9,11 @@ class Tuple:
         Args:
             value: Элемент число вхождения которого ищется в объекте
         """
-        raise NotImplementedError
+        counter = 0
+        for elements in Tuple:
+            if elements == value:
+                counter += 1
+        return counter
 
     def index(self, value):
         """
@@ -17,4 +21,12 @@ class Tuple:
         Args:
             value: Элемент индекс которого ищется в объекте
         """
-        raise NotImplementedError
+        try:
+            index = 0
+            for elements in Tuple:
+                if elements == value:
+                    return index
+                index += 1
+
+        except ValueError:
+            print('No elements in Tuple')
