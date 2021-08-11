@@ -18,20 +18,25 @@ def great_comprehension(list1, list2, list3):
             out1 = int(num1_str[0])+int(num1_str[len(num1_str)-1])
             list1_out.append(out1)
 
+    # part1 = [int(str(num1)[0])+int(str(num1)[len(str(num1))-1]) for num1 in list1 if len(str(num1)) > 1 and str(num1)[0] == str(num1)[len(str(num1))-1]]
+
     for num2 in list2:
         num2_str = str(num2)
         if len(num2_str) == 3 and num2 % 2 == 0:
             out2 = sqrt(num2)
             list2_out.append(out2)
 
+    # part2 = [sqrt(num2) for num2 in list2 if len(str(num2)) == 3 and num2 % 2 == 0]
+
     for num3 in list3:
         if num3 % 2 == 1 or num3 == 4:
             list3_out.append(num3)
 
-    great_list = [list1_out[i]*list2_out[i]*list3_out[i] for i in range(min([len(list1_out), len(list2_out), len(list3_out)]))]
-    # print('Great list is ', great_list)
+    part3 =[num3 for num3 in list3 if num3 % 2 == 1 or num3 == 4]
 
-great_comprehension(list1, list2, list3)
+    great_list = [list1_out[i]*list2_out[i]*list3_out[i] for i in range(min([len(list1_out), len(list2_out), len(list3_out)]))]
+    return great_list
+# great_comprehension(list1, list2, list3)
 """
 Вам нужно написать comprehension который будет перемножать три значения из списков при некоторых условиях:
 1. Если первая и последняя **ЦИФРА** для _ЧИСЛА_ из первого списка равны между собой, то вы берете сумму этих **ЦИФР** 
