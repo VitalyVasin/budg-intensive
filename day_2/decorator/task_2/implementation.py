@@ -6,7 +6,7 @@ def check_value(func):
     В случае валидного значения - передает дальше в функцию,
     в противном случае - выбрасывает исключение MyException.
     """
-    def sub_func(a):
+    def wrapper(a):
         try:
             if (type(a) != int) or (a == None) or a < 0:
                 raise MyException
@@ -17,5 +17,5 @@ def check_value(func):
 
         return func(a)
 
-    return sub_func
+    return wrapper
 

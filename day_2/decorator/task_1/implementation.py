@@ -6,14 +6,14 @@ def time_execution(func):
     """
     Обертка, печатающая время выполнения функции.
     """
-    def subfunc(*args, **kwargs):
+    def wrapper(*args, **kwargs):
         start_time = time.time()
         result_func = func(*args, **kwargs)
         end_time = time.time()
         result_time = round(end_time - start_time, 4)
         print('Функция работала ', result_time, ' секунд')
         return result_func
-    return subfunc
+    return wrapper
 
 
 @time_execution
