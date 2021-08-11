@@ -7,9 +7,10 @@ def counter(func):
     """
 
     def wrapper(*args, **kwargs):
-        wrapper.count += 1
+        nonlocal count
+        count += 1
 
-        return wrapper.count
+        return count
 
-    wrapper.count = 0
+    count = 0
     return wrapper
