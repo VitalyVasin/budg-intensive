@@ -86,13 +86,13 @@ class Million(Multiplier):
         print(self.get_value)
         return int(self.get_value)
 
-num = Hundred(10)
-num2 = Hundred(2)
-num.get_value()
-num2.get_value()
-num3 = num / num2
-num3.get_value()
-print(num3.get_value)
+# num = Hundred(10)
+# num2 = Hundred(2)
+# num.get_value()
+# num2.get_value()
+# num3 = num / num2
+# num3.get_value()
+# print(num3.get_value)
 
 
 
