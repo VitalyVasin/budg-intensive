@@ -1,8 +1,10 @@
 def return_errors(filename):
-    """
-    Функция, которая возвращает строки из лога со словом error
-    """
-    raise NotImplementedError
-
+    with open(filename) as file:
+        gen = (line for line in file if 'ERROR' in line)
+        for line in gen:
+            print(line)
 
 return_errors('log.txt')
+
+
+
