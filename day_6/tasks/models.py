@@ -8,10 +8,14 @@ class WorkerManager(models.Manager):
     """
     def get_queryset(self):
         """
-        Переопределенный кверисет с фильтрацией сотрудников с заданной датой принятия на работу и с не пустым табельным номером отличным от 0
+        Переопределенный кверисет с фильтрацией сотрудников с заданной датой принятия на работу и с не пустым табельным
+        номером отличным от 0
         """
+        return Worker.objects.filter(startwork_date__isnull=False,
+            tab_num__isnull=False,
+            tab_num != 0
+        )
 
-        raise NotImplementedError
 
 
     def get_workers_info(self):
@@ -21,8 +25,15 @@ class WorkerManager(models.Manager):
         Строки упорядочены по фамилии и имени сотрудника.
         Каждая строка должна быть в формате вида: Васильев Василий, 888, Подразделение №1
         """
+        return Worker.objects.first(
+            'first_name',
+            'last_name',
+            'tab_num',
+            'department'
+        ).custom_order_by('first_name',
+                          'last_name'
+        )
 
-        raise NotImplementedError
 
 
 class Department(models.Model):
@@ -33,14 +44,17 @@ class Department(models.Model):
         """
         Количество активных сотрудников подразделения
         """
-        raise NotImplementedError
+        Worker.objects.filter(startwork_date__isnull=False,
+                              tab_num__isnull=False,
+                              tab_num != 0
+                              )
 
     @property
     def get_all_worker_count(self):
         """
         Количество всех сотрудников подразделения
         """
-        raise NotImplementedError
+        Worker.objects.all()
 
     class Meta:
         db_table = 'department'
