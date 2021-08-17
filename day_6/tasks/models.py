@@ -12,9 +12,8 @@ class WorkerManager(models.Manager):
         номером отличным от 0
         """
         return Worker.objects.filter(startwork_date__isnull=False,
-            tab_num__isnull=False,
-            tab_num != 0
-        )
+            tab_num__isnull=False
+        ).exclude(tab_num != 0)
 
 
 
@@ -25,14 +24,14 @@ class WorkerManager(models.Manager):
         Строки упорядочены по фамилии и имени сотрудника.
         Каждая строка должна быть в формате вида: Васильев Василий, 888, Подразделение №1
         """
-        return Worker.objects.filter(
+        return list(Worker.objects.filter(
             first_name,
             last_name,
             tab_num,
             department
-        ).custom_order_by('first_name',
+        ).order_by('first_name',
                           'last_name'
-        )
+        ))
 
 
 
@@ -40,22 +39,20 @@ class Department(models.Model):
     name = models.CharField('Наименование', max_length=30)
 
     @property
-    def get_active_worker_count(self, department_name):
+    def get_active_worker_count(self):
         """
         Количество активных сотрудников подразделения
         """
-        Worker.objects.filter(startwork_date__isnull=False,
-                              tab_num__isnull=False,
-                              tab_num != 0,
-                              department == department_name
-                              )
+        active_workers_count = get_queryset()
+        return active_workers_count
 
     @property
-    def get_all_worker_count(self, department_name):
+    def get_all_worker_count(self):
         """
         Количество всех сотрудников подразделения
         """
-        Worker.objects.filter(department == department_name)
+        all_workers_count = get_active_worker_count()
+        return all_workers_count
 
     class Meta:
         db_table = 'department'
