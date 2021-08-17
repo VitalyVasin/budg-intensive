@@ -7,4 +7,4 @@ def get_top_order_by_sum_in_period(begin, end):
 
     Returns: возвращает номер заказа и его сумму
     """
-    raise NotImplementedError
+    return ProductCost.objects.filter(date_formation__gt = begin, bdate_formation__lt = end).order_by(-'value').first

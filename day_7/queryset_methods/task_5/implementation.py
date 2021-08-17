@@ -8,4 +8,4 @@ def get_average_cost_without_product(product, begin, end):
 
     Returns: возвращает числовое значение средней стоимости
     """
-    raise NotImplementedError
+    return
